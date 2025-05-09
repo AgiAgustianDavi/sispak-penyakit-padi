@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Diagnosa Penyakit Padi</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to bottom right, #e0f7fa, #fff);
+            margin: 0;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        form {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #00796b;
+        }
+
+        label {
+            display: block;
+            margin: 12px 0 6px;
+            font-weight: 500;
+        }
+
+        select,
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #00796b;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        button:hover {
+            background-color: #004d40;
+        }
+
+        .result {
+            text-align: center;
+            margin-top: 25px;
+            font-weight: bold;
+            font-size: 18px;
+            color: #2e7d32;
+            background-color: #e8f5e9;
+            padding: 15px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <form method="post">
+        <h2>Form Diagnosa Penyakit Padi</h2>
+
+        <label>Ada bercak?</label>
+        <select name="ada_bercak" required>
+            <option value="ya" {% if request.form.get('ada_bercak') == 'ya' %}selected{% endif %}>Ya</option>
+            <option value="tidak" {% if request.form.get('ada_bercak') == 'tidak' %}selected{% endif %}>Tidak</option>
+        </select>
+        <input type="number" step="0.01" min="0" max="1" name="cf_ada_bercak" placeholder="Tingkat keyakinan (0-1)"
+            value="{{ request.form.get('cf_ada_bercak', '') }}" required>
+
+        <label>Daun menjadi kuning dan kering dengan cepat?</label>
+        <select name="kuning_kering" required>
+            <option value="ya" {% if request.form.get('kuning_kering') == 'ya' %}selected{% endif %}>Ya</option>
+            <option value="tidak" {% if request.form.get('kuning_kering') == 'tidak' %}selected{% endif %}>Tidak</option>
+        </select>
+        <input type="number" step="0.01" min="0" max="1" name="cf_kuning_kering" placeholder="Tingkat keyakinan (0-1)"
+            value="{{ request.form.get('cf_kuning_kering', '') }}" required>
+
+        <label>Tanaman kerdil?</label>
+        <select name="kerdil" required>
+            <option value="ya" {% if request.form.get('kerdil') == 'ya' %}selected{% endif %}>Ya</option>
+            <option value="tidak" {% if request.form.get('kerdil') == 'tidak' %}selected{% endif %}>Tidak</option>
+        </select>
+        <input type="number" step="0.01" min="0" max="1" name="cf_kerdil" placeholder="Tingkat keyakinan (0-1)"
+            value="{{ request.form.get('cf_kerdil', '') }}" required>
+
+        <label>Batang busuk?</label>
+        <select name="busuk" required>
+            <option value="ya" {% if request.form.get('busuk') == 'ya' %}selected{% endif %}>Ya</option>
+            <option value="tidak" {% if request.form.get('busuk') == 'tidak' %}selected{% endif %}>Tidak</option>
+        </select>
+        <input type="number" step="0.01" min="0" max="1" name="cf_busuk" placeholder="Tingkat keyakinan (0-1)"
+            value="{{ request.form.get('cf_busuk', '') }}" required>
+
+        <label>Terserang hama?</label>
+        <select name="ters_hama" required>
+            <option value="ya" {% if request.form.get('ters_hama') == 'ya' %}selected{% endif %}>Ya</option>
+            <option value="tidak" {% if request.form.get('ters_hama') == 'tidak' %}selected{% endif %}>Tidak</option>
+        </select>
+        <input type="number" step="0.01" min="0" max="1" name="cf_ters_hama" placeholder="Tingkat keyakinan (0-1)"
+            value="{{ request.form.get('cf_ters_hama', '') }}" required>
+
+        <label>Kondisi biji?</label>
+        <select name="biji" required>
+            <option value="kosong" {% if request.form.get('biji') == 'kosong' %}selected{% endif %}>Kosong</option>
+            <option value="berisi" {% if request.form.get('biji') == 'berisi' %}selected{% endif %}>Berisi</option>
+        </select>
+
+        <button type="submit">Diagnosa</button>
+
+        {% if diagnosis %}
+        <div class="result">
+            Hasil Diagnosa: <br>
+            {{ diagnosis }}<br>
+        </div>
+        {% endif %}
+    </form>
+</body>
+
+</html> 
