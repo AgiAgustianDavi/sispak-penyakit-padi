@@ -41,6 +41,20 @@ def forward_chaining(input_data):
     # RULE 4: IF kondisi_daun = Not ok THEN terserang penyakit (CF = 0.95)
     if input_data["ada_bercak"] == "ya" or input_data["kuning_kering"] == "ya":
         cf_list.append(0.95)
+    
+        # RULE 7: IF ada bercak = tidak AND kuning_kering = tidak THEN kondisi_daun = Ok (CF = 0.9)
+    if input_data["ada_bercak"] == "tidak" and input_data["kuning_kering"] == "tidak":
+        cf_list.append(0.9)
+
+    # RULE 10: IF kerdil = tidak AND busuk = tidak THEN kondisi_batang = Ok (CF = 0.9)
+    if input_data["kerdil"] == "tidak" and input_data["busuk"] == "tidak":
+        cf_list.append(0.9)
+
+    # RULE 2: IF kondisi_daun = Ok AND ters_hama = tidak AND kondisi_batang = Ok THEN tidak terserang penyakit (CF = 0.9)
+    if (input_data["ada_bercak"] == "tidak" and input_data["kuning_kering"] == "tidak" and
+        input_data["ters_hama"] == "tidak" and input_data["kerdil"] == "tidak" and input_data["busuk"] == "tidak"):
+        return "Tidak terserang penyakit (CF: 0.9)"
+
 
     # === GABUNGKAN CF ===
     def combine_cf(cf_values):
