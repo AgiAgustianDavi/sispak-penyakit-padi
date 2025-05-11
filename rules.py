@@ -8,15 +8,15 @@ def forward_chaining(input_data):
     # Daftar rule yang menghasilkan "Terserang penyakit" dan nilai CF-nya
     cf_list = []
 
-    # RULE 5: IF ada bercak = ya THEN kondisi_daun = Not ok (CF = 0.85)
+    # RULE 5: IF ada bercak = ya THEN kondisi_daun = Not ok (CF = 0.80)
     if input_data["ada_bercak"] == "ya":
         cf_evidence = float(input_data["cf_ada_bercak"])
-        cf_list.append(0.85 * cf_evidence)
+        cf_list.append(0.80 * cf_evidence)
 
-    # RULE 6: IF kuning_kering = ya AND ada bercak = tidak THEN kondisi_daun = Not ok (CF = 0.8)
+    # RULE 6: IF kuning_kering = ya AND ada bercak = tidak THEN kondisi_daun = Not ok (CF = 0.75)
     if input_data["kuning_kering"] == "ya" and input_data["ada_bercak"] == "tidak":
         cf_evidence = float(input_data["cf_kuning_kering"])
-        cf_list.append(0.8 * cf_evidence)
+        cf_list.append(0.75 * cf_evidence)
 
     # RULE 8: IF kerdil = ya THEN kondisi_batang = Not ok (CF = 0.8)
     if input_data["kerdil"] == "ya":
