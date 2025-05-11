@@ -42,7 +42,7 @@ def forward_chaining(input_data):
     if input_data["ada_bercak"] == "ya" or input_data["kuning_kering"] == "ya":
         cf_list.append(0.95)
     
-        # RULE 7: IF ada bercak = tidak AND kuning_kering = tidak THEN kondisi_daun = Ok (CF = 0.9)
+    # RULE 7: IF ada bercak = tidak AND kuning_kering = tidak THEN kondisi_daun = Ok (CF = 0.9)
     if input_data["ada_bercak"] == "tidak" and input_data["kuning_kering"] == "tidak":
         cf_list.append(0.9)
 
